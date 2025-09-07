@@ -25,7 +25,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className="w-[95%] min-w-sm mx-auto mt-4 rounded-[200px] flex items-center justify-between py-3 md:py-7 px-[4%] font-space-grotesk border border-[#F9FAFB] " >
+        <nav className="w-[95%] min-w-sm mx-auto mt-4 rounded-[200px] flex items-center justify-between py-3 md:py-5 px-[4%] font-space-grotesk border border-[#F9FAFB] " >
             <Link href={"/"} className="flex items-center gap-2" >
                 <Image src={"/logo/aptos_logo.png"} alt="Aptos-Scaffold" width={200} height={200} className=" w-5 md:w-[40px] " />
                 <h4 className=" text-base md:text-xl " >Aptos Scaffold</h4>

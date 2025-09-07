@@ -1,8 +1,8 @@
-"use client"
+import Hero from "@/components/Hero";
+import JoinCommunity from "@/components/JoinCommunity";
 
 
-import ConnectButton from "@/components/ConnectButton";
-import ConnectWithGoogle from "@/components/ConnectWithGoogle";
+
 
 
 
@@ -17,20 +17,15 @@ export default function Home() {
 
 
 
-    <div className=" h-screen flex items-center justify-center flex-col gap-1" >
+    < >
+    <Hero/>
+    <JoinCommunity/>
 
 
 
 
 
 
-
-
-
-      <ConnectWithGoogle variant="default">Connect with google</ConnectWithGoogle>
-
-
-      <ConnectButton variant="default" >Connect Wallet</ConnectButton>
-    </div>
+    </>
   );
 }

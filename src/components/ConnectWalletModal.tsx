@@ -28,8 +28,8 @@ export default function ConnectWalletModal({ setShowModal }: ConnectWalletModalP
 
 
                 <div className="flex flex-col items-start w-full gap-3" >
-                    <ConnectButton variant="default" className="w-full flex items-center gap-2" ><span>Connect Petra Wallet</span> <Image src={"/logo/pectra-logo.png"} alt="Aptos-Scaffold" width={200} height={200} className=" w-7 rounded-full   " /> </ConnectButton>
-                    <ConnectWithGoogle variant="default" className="w-full flex items-center gap-2">Connect with google <Image src={"/logo/Google__G__logo.png"} alt="Aptos-Scaffold" width={200} height={200} className=" w-7 rounded-full   " /> </ConnectWithGoogle>
+                    <ConnectButton variant="default" className="w-full flex items-center gap-2" ><span>Connect Petra Wallet</span> <Image src={"/logo/pectra-logo.png"} alt="Aptos-Scaffold" width={200} height={200} className=" w-6 rounded-full   " /> </ConnectButton>
+                    <ConnectWithGoogle variant="default" className="w-full flex items-center gap-2">Connect with google <Image src={"/logo/Google__G__logo.png"} alt="Aptos-Scaffold" width={200} height={200} className=" w-6 rounded-full   " /> </ConnectWithGoogle>
 
 
                 </div>
