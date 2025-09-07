@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import JoinCommunity from "@/components/JoinCommunity";
 
@@ -20,6 +21,7 @@ export default function Home() {
     < >
     <Hero/>
     <JoinCommunity/>
+    <Footer/>
 
 
 
