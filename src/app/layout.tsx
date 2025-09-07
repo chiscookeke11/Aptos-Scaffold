@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import WalletProvider from "@/providers.tsx/WalletProviders";
 import Navbar from "@/components/Navbar";
+import { ToastContainer } from "react-toastify";
 
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <WalletProvider>
           <Navbar />
           {children}
+          <ToastContainer position="top-right" autoClose={2000} />
         </WalletProvider>
       </body>
     </html>

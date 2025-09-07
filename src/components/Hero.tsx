@@ -1,16 +1,31 @@
+"use client"
+
+import { handleCopy } from "@/utils/copyText";
+import { Copy } from "lucide-react";
+import Image from "next/image";
 
 
 
 export default function Hero() {
+
+    const githubUrl = "https://github.com/chiscookeke11/Aptos-Scaffold.git"
+    const npmCommand = "npm install nedu"
+
+
+
     return (
-        <section className="w-full h-screen bg-[var(--background)] my-3 flex items-center justify-center  font-space-grotesk relative py-4 px-5 " >
+        <section className="w-full h-[88vh] bg-[var(--background)] my-3 flex items-center justify-center  font-space-grotesk relative py-4 px-5 " >
 
             <div className="w-full max-w-2xl flex flex-col items-center text-center justify-center gap-6  " >
-                <h1 className= " text-4xl md:text-6xl font-bold text-white  " >Build and launch your DApps <span className="text-transparent bg-clip-text bg-[linear-gradient(90deg,#D3A86C_0%,#91C8CA_22%,#9FE0D1_58%,#D3A86C_100%)]" > 5x faster</span></h1>
+                <h1 className=" text-4xl md:text-6xl font-bold text-white  " >Build and launch your DApps <span className="text-transparent bg-clip-text bg-[linear-gradient(90deg,#D3A86C_0%,#91C8CA_22%,#9FE0D1_58%,#D3A86C_100%)]" > 5x faster</span></h1>
                 <p className=" text-base md:text-xl text-white/90 md:px-7">
                     A modern, open-source toolkit for Aptos developers. Go from idea to scalable dApps without friction.
                 </p>
-                <button className="rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out  px-6 py-2 md:py-3  flex items-center justify-center   focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins" >Git url</button>
+                <button
+                    onClick={() => handleCopy(githubUrl)}
+                    className="rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out  px-6 py-2 md:py-3  flex items-center justify-center gap-3   focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins" >
+                    https://github.com/chiscookeke11/Aptos-Scaffold.git <Copy size={20} />
+                </button>
 
 
 
@@ -22,9 +37,21 @@ export default function Hero() {
 
 
 
-                <button className="rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out  px-6 py-2 md:py-3  flex items-center justify-center   focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins" >npm install nedu</button>
+                <button onClick={() => handleCopy(npmCommand)} className="rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out  px-6 py-2 md:py-3  flex items-center justify-center  gap-3  focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins" >npm install nedu <Copy size={20} />  </button>
 
             </div>
+
+
+
+
+
+
+
+
+
+
+            <Image src={"/logo/tailwind-logo.svg"} alt="" height={50} width={50} className="absolute left-[12%] top-[50%] translate-y-[50%] " />
+
         </section>
     )
 }
