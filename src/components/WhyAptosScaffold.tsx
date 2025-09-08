@@ -1,4 +1,4 @@
-import { Earth, HandCoins, HopIcon, Palette, Rocket, SquareCheckBig, Zap } from "lucide-react"
+import { HandCoins, Palette, Rocket, SquareCheckBig, Zap } from "lucide-react"
 
 
 
