@@ -50,7 +50,13 @@ export default function Hero() {
 
 
 
-            <Image src={"/logo/tailwind-logo.svg"} alt="" height={50} width={50} className="absolute left-[12%] top-[50%] translate-y-[50%] " />
+            <Image src={"/logo/tailwind-logo.svg"} alt="" height={50} width={50} className="absolute left-[5%] lg:left-[12%] top-[50%] translate-y-[50%] hidden md:block opacity-35 " /> {/* Tailwind logo */}
+            <Image src={"/logo/ts-logo.svg"} alt="" height={50} width={50} className="absolute right-[5%] lg:right-[12%] top-[50%] translate-y-[50%] hidden md:block opacity-35 " /> {/* typescript logo */}
+
+
+
+
+            <Image src={"/logo/react-logo.png"} alt="" height={50} width={50} className="absolute right-[7%] lg:right-[14%] top-[20%] translate-y-[50%] hidden md:block opacity-35 " /> {/* react logo */}
 
         </section>
     )
