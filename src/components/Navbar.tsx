@@ -3,12 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import ConnectWalletModal from "./ConnectWalletModal";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
+import { toast } from "react-toastify";
 
 
 
 export default function Navbar() {
     const [showModal, setShowModal] = useState(false)
+    const { account, connected, disconnect } = useWallet()
+    const btnRef = useRef<HTMLButtonElement | null>(null)
+    const [hovered, setHovered] = useState(false);
 
 
 
@@ -24,6 +29,25 @@ export default function Navbar() {
 
 
 
+
+
+
+    const handleDisconnect = async () => {
+        try {
+            disconnect()
+        } catch (err) {
+            console.error("Failed to disconnect:", err);
+        }
+    };
+
+    const getAddressLabel = () => {
+        if (!account?.address) return "";
+        const addr = account.address.toString();
+        return addr.slice(0, 4) + "....." + addr.slice(addr.length - 4);
+    };
+
+
+
     return (
         <nav className="w-[95%] min-w-xs mx-auto mt-4 rounded-[200px] flex items-center justify-between py-3 md:py-5 px-[4%] font-space-grotesk border border-[#F9FAFB] " >
             <Link href={"/"} className="flex items-center gap-2" >
@@ -32,7 +56,18 @@ export default function Navbar() {
             </Link>
 
 
-            <button onClick={() => setShowModal(true)} className="cursor-pointer px-3 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-sm md:text-base font-semibold bg-white text-[#171717] rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out  " aria-label="Connect Wallet" >Connect Wallet</button>
+
+            {connected ?
+                <button ref={btnRef}
+                    onClick={handleDisconnect}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                    className="cursor-pointer px-3 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-sm md:text-base font-semibold bg-white text-[#171717] rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out  " >
+                    {hovered ? "Disconnect" : `Connected: ${getAddressLabel()}`} </button>
+                :
+                <button onClick={() => setShowModal(true)} className="cursor-pointer px-3 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-sm md:text-base font-semibold bg-white text-[#171717] rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out  " aria-label="Connect Wallet" >Connect Wallet</button>
+            }
+
 
 
             {showModal && (<ConnectWalletModal setShowModal={setShowModal} />)}

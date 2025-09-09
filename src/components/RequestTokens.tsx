@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 export default function RequestTokens() {
 
     const [recipientAddress, setRecipientAddress] = useState("")
-    const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
 
 
@@ -19,7 +18,7 @@ export default function RequestTokens() {
         e.preventDefault()
 
 
-        if (!recipientAddress || amount < 1) {
+        if (!recipientAddress) {
             toast.error("Please fill in all fields")
             return;
         }
@@ -28,10 +27,9 @@ export default function RequestTokens() {
 
         try {
             console.log("Submitted")
-            await aptos.fundAccount({ accountAddress: recipientAddress, amount: 100000000 * amount });
+            await aptos.fundAccount({ accountAddress: recipientAddress, amount: 100000000 });
             toast.success("Minted")
             setRecipientAddress("")
-            setAmount(0)
         }
         catch (error: unknown) {
             if (error instanceof Error)
@@ -76,23 +74,14 @@ export default function RequestTokens() {
                 </label>
 
                 <label htmlFor="amount" className="w-full max-w-md">
-                    Enter amount
                     <input
                         type="text"
                         name="amount"
                         id="amount"
-                        value={amount}
-                        onChange={(e) => {
-                            const value = Number(e.target.value);
-
-                            if (isNaN(value)) {
-                                return;
-                            }
-                            setAmount(value)
-
-                        }}
-                        placeholder="0x4eccf6259e44187e2f9a578ab13bca173f351d1ec75539038aa10113bad2b6cc"
+                        placeholder="1 APT"
+                        value={"1 APT"}
                         className=" border-2 border-[#171717] outline-none py-4 px-3 rounded-md w-full "
+                        readOnly
                     />
                 </label>
 
@@ -112,7 +101,7 @@ export default function RequestTokens() {
 
 
                 <button
-                    disabled={!recipientAddress || amount < 0}
+                    disabled={!recipientAddress}
                     className="cursor-pointer px-6 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-lg md:text-xl font-bold bg-[#171717] text-white rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out disabled:cursor-not-allowed  "
                     aria-label="mint">
                     {loading ? "Minting ..." : "    Mint"}

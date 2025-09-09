@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { SetStateAction, useEffect } from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 
@@ -7,48 +9,40 @@ interface ConnectButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     className?: string
     children: React.ReactNode,
     variant?: "outline" | "default"
-    ariaLabel?: string
+    ariaLabel?: string,
+    setShowModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
 
 
 
-const Spinner = () => {
-    return (
-        <div className="w-5 h-5 rounded-full border-2 border-red-700 border-t-transparent animate-spin duration-300  "  >
-
-        </div>
-    )
-}
 
 
 
-export default function ConnectButton({ children, className, ariaLabel, variant = "outline", ...props }: ConnectButtonProps) {
-    const { connect, disconnect, connected, isLoading } = useWallet()
+export default function ConnectButton({ children, className, ariaLabel, setShowModal, variant = "outline", ...props }: ConnectButtonProps) {
+    const { connect, connected } = useWallet()
+
 
     const baseStyles = " px-6 py-2 md:py-3  flex items-center justify-center   focus:outline-none cursor-pointer text-sm md:text-base font-semibold font-poppins "
 
     const variantStyles = variant === "outline" ? " rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out " : " border-[1px] border-[#171717] text-[#171717]  rounded-sm hover:bg-[#171717] hover:text-white transition-all duration-300 ease-in-out  "
 
+    useEffect(() => {
+        if (connected) {
+            setShowModal(false)
+        }
+    }, [connected])
+
 
 
     return (
         <>
-            {
-                connected ?
-                    (
-                        <button onClick={disconnect} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
-                            Disconnect wallet
-                        </button>
-                    )
-                    :
-                    (
-                        <button onClick={() => connect("Petra")} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
-                            {isLoading ? <Spinner/> : children}
-                        </button>
-                    )
-            }
+
+            <button onClick={() => connect("Petra")} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
+                {children}
+            </button>
+
         </>
     )
 }

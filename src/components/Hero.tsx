@@ -50,18 +50,18 @@ export default function Hero() {
 
 
 
-            <Image src={"/logo/tailwind-logo.svg"} alt="" height={50} width={50} className="absolute left-[4%] lg:left-[10%] top-[50%] translate-y-[50%] hidden md:block opacity-90 " /> {/* Tailwind logo */}
-            <Image src={"/logo/ts-logo.svg"} alt="" height={50} width={50} className="absolute right-[4%] lg:right-[10%] top-[50%] translate-y-[50%] hidden md:block opacity-90 " /> {/* typescript logo */}
+            <Image src={"/logo/tailwind-logo.svg"} alt="" height={50} width={50} className="absolute left-[4%] lg:left-[10%] top-[50%] translate-y-[50%] hidden md:block opacity-90  animate-float" /> {/* Tailwind logo */}
+            <Image src={"/logo/ts-logo.svg"} alt="" height={50} width={50} className="absolute right-[4%] lg:right-[10%] top-[50%] translate-y-[50%] hidden md:block opacity-90  animate-float" /> {/* typescript logo */}
 
 
 
 
-            <Image src={"/logo/react-logo.svg"} alt="" height={50} width={50} className="absolute right-[7%] lg:right-[14%] top-[20%] translate-y-[50%] hidden md:block opacity-90 " /> {/* react logo */}
-            <Image src={"/logo/Aptos_mark_WHT.svg"} alt="" height={50} width={50} className="absolute left-[7%] lg:left-[14%] top-[20%] translate-y-[50%] hidden md:block opacity-90 " /> {/* Aptos logo */}
+            <Image src={"/logo/react-logo.svg"} alt="" height={50} width={50} className="absolute right-[7%] lg:right-[14%] top-[20%] translate-y-[50%] hidden md:block opacity-90 animate-float " /> {/* react logo */}
+            <Image src={"/logo/Aptos_mark_WHT.svg"} alt="" height={50} width={50} className="absolute left-[7%] lg:left-[14%] top-[20%] translate-y-[50%] hidden md:block opacity-90 animate-float" /> {/* Aptos logo */}
 
 
-            <Image src={"/logo/nextJs-logo.png"} alt="" height={50} width={50} className="absolute left-[7%] lg:left-[14%] bottom-[20%] translate-y-[50%] hidden md:block opacity-90 " /> {/* NextJs logo */}
-            <Image src={"/logo/nodeJs-logo.jpg"} alt="" height={50} width={50} className="absolute right-[7%] lg:right-[14%] bottom-[20%] translate-y-[50%] hidden md:block opacity-90 rounded-full " /> {/* NextJs logo */}
+            <Image src={"/logo/nextJs-logo.png"} alt="" height={50} width={50} className="absolute left-[7%] lg:left-[14%] bottom-[20%] translate-y-[50%] hidden md:block opacity-90 animate-float" /> {/* NextJs logo */}
+            <Image src={"/logo/nodeJs-logo.jpg"} alt="" height={50} width={50} className="absolute right-[7%] lg:right-[14%] bottom-[20%] translate-y-[50%] hidden md:block opacity-90 rounded-full animate-float" /> {/* NextJs logo */}
 
 
         </section>

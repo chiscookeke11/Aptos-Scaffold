@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 
@@ -7,25 +7,17 @@ interface ConnectWithGoogleProps extends React.ButtonHTMLAttributes<HTMLButtonEl
     className?: string
     children: React.ReactNode,
     variant?: "outline" | "default"
-    ariaLabel?: string
+    ariaLabel?: string,
+    setShowModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
 
 
 
-const Spinner = () => {
-    return (
-        <div className="w-5 h-5 rounded-full border-2 border-red-700 border-t-transparent animate-spin duration-300  "  >
 
-        </div>
-    )
-}
-
-
-
-export default function ConnectWithGoogle({ children, className, ariaLabel, variant = "outline", ...props }: ConnectWithGoogleProps) {
-    const { connect, disconnect, connected, isLoading, signIn } = useWallet()
+export default function ConnectWithGoogle({ children, className, ariaLabel, setShowModal, variant = "outline", ...props }: ConnectWithGoogleProps) {
+    const { connected, signIn } = useWallet()
     const [walletName, setWalletName] = useState<string | null>(null)
 
 
@@ -54,8 +46,12 @@ export default function ConnectWithGoogle({ children, className, ariaLabel, vari
     }, [connected])
 
 
+    useEffect(() => {
+        if (connected) {
+            setShowModal(false)
+        }
+    }, [connected])
 
-    console.log(walletName)
 
 
 
@@ -68,20 +64,11 @@ export default function ConnectWithGoogle({ children, className, ariaLabel, vari
 
     return (
         <>
-            {
-                connected ?
-                    (
-                        <button onClick={disconnect} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
-                            Disconnect wallet
-                        </button>
-                    )
-                    :
-                    (
-                        <button onClick={handleSignIn} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
-                            {isLoading ? <Spinner /> : children}
-                        </button>
-                    )
-            }
+
+            <button onClick={handleSignIn} aria-label={ariaLabel} className={` ${className} ${variantStyles} ${baseStyles} `} {...props}  >
+                {children}
+            </button>
+
         </>
     )
 }
