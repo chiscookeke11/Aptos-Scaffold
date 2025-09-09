@@ -53,9 +53,9 @@ export default function RequestTokens() {
 
 
     return (
-        <section className="text-white w-full flex items-start justify-evenly flex-col md:flex-row gap-10 py-28 px-[4%] font-space-grotesk  " >
+        <section className="text-white w-full flex items-center md:items-start justify-evenly flex-col md:flex-row gap-10 py-28 px-[4%] font-space-grotesk  " >
 
-            <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-[linear-gradient(90deg,#D3A86C_0%,#91C8CA_22%,#9FE0D1_58%,#D3A86C_100%)]">Mint  Faucet</h1>
+            <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-[linear-gradient(90deg,#D3A86C_0%,#91C8CA_22%,#9FE0D1_58%,#D3A86C_100%)]">Need Faucets?</h1>
 
 
 
