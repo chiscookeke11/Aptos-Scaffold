@@ -12,7 +12,7 @@ export const FeaturesData = [
   {
     title: "Aptos Converter",
     description: "Quickly convert between Aptos tokens and other supported assets with real-time exchange rates.",
-    url: "#"
+    url: "/Converter"
   },
   {
     title: "Aptos Explorer",

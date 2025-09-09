@@ -13,7 +13,7 @@ export default function Features() {
 
 
             {FeaturesData.map((data, index) => (
-                <Link key={index} href={data.url}>
+                <Link key={index} href={data.url} target="_blank" >
                     <div  className="w-full flex items-start flex-col h-[300px] bg-black/90 hover:bg-white rounded-xl px-4 py-6 text-white hover:text-black gap-3 transition-all duration-200 ease-in-out cursor-pointer gradient-border relative group " >
                         <h4 className=" font-bold text-xl md:text-2xl flex items-center gap-2 " >
                             {data.title}
