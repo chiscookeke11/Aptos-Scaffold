@@ -63,7 +63,7 @@ export default function Navbar() {
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
                     className="cursor-pointer px-3 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-sm md:text-base font-semibold bg-white text-[#171717] rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out  " >
-                    {hovered ? "Disconnect" : `Connected: ${getAddressLabel()}`} </button>
+                    {hovered ? "Disconnect" : ` ${getAddressLabel()}`} </button>
                 :
                 <button onClick={() => setShowModal(true)} className="cursor-pointer px-3 md:px-6 py-2 md:py-3 flex items-center justify-center   focus:outline-none  text-sm md:text-base font-semibold bg-white text-[#171717] rounded-md hover:rounded-4xl transition-all duration-200 ease-in-out  " aria-label="Connect Wallet" >Connect Wallet</button>
             }
