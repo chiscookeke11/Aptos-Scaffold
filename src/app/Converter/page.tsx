@@ -22,30 +22,71 @@ type RatesData = {
 
 export default function Page() {
     const [rates, setRates] = useState<RatesData | null>(null)
-    const number = 10
     const [selectedToken, setSelectedToken] = useState<keyof RatesData>("aptos")
     const [fromCurrency, setFromCurrency] = useState<"USD" | "APTOS">("APTOS")
     const [toCurrency, setToCurrency] = useState<"USD" | "APTOS">("USD")
+    const [fromValue, setFromValue] = useState<string>("")
+    const [toValue, setToValue] = useState<string>("")
 
 
 
-    const calcPrice = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const convertCurrency = (value: string, isFromInput: boolean) => {
+        if (!rates || !value || isNaN(Number(value))) {
+            if (isFromInput) {
+                setToValue("")
+            }
+            else {
+                setFromValue("")
+            }
+            return
+        }
 
 
-        if (!rates) return null;
+        const numValue = Number(value)
+        const rate = rates[selectedToken]?.usd
+
+        if (!rate) return
 
 
+        if (isFromInput) {
+            // converting from input
+            if (fromCurrency === "APTOS") {
+                // APTOS to USD
+                const converted = numValue * rate
+                setToValue(converted.toFixed(2))
+            }
+            else {
+                // USD to APTOS
+                const converted = numValue / rate
+                setToValue(converted.toFixed(6))
+            }
+        }
         else {
-            const price = rates?.[selectedToken]?.usd * number
-            console.log(price)
-            return price
+            // converting to input (reverse calculation)
+            if (toCurrency === "USD") {
+                // USD to APTOS
+                const converted = numValue / rate
+                setFromValue(converted.toFixed(6))
+            }
+            else {
+                // APTOS to USD
+                const converted = numValue * rate
+                setFromValue(converted.toFixed(2))
+            }
         }
     }
 
+    const handleFromValueChange = (value: string) => {
+        setFromValue(value)
+        convertCurrency(value, true)
+    }
+
+    const handleToValueChange = (value: string) => {
+        setToValue(value)
+        convertCurrency(value, false)
+    }
 
     useEffect(() => {
-
         const fetchRates = () => {
             fetch("https://api.coingecko.com/api/v3/simple/price?ids=aptos,ethereum,bitcoin&vs_currencies=usd,ngn,eur,usdc")
                 .then((res) => res.json())
@@ -53,41 +94,47 @@ export default function Page() {
                     setRates(data)
                 })
                 .catch((err) => console.error(err))
-
-
         }
         fetchRates()
-
     }, [])
 
 
-
     const switchCurrencies = () => {
-        if (fromCurrency === "APTOS" && toCurrency === "USD") {
-            setFromCurrency("USD")
-            setToCurrency("APTOS")
-        }
-        else if (fromCurrency === "USD" && toCurrency === "APTOS") {
-            setFromCurrency("APTOS")
-            setToCurrency("USD")
-        }
-        else return;
+        const newFromCurrency = toCurrency;
+        const newToCurrency = fromCurrency
+        const newFromValue = toValue
+        const newToValue = fromValue
+
+        setFromCurrency(newFromCurrency)
+        setToCurrency(newToCurrency)
+        setFromValue(newFromValue)
+        setToValue(newToValue)
+
     }
-
-
-    console.log(rates?.aptos?.usd)
-
-
-    console.log("from currency:", fromCurrency)
-    console.log("to currency:", toCurrency)
 
 
     return (
         <div className="w-full h-screen flex items-center justify-center px-4 py-5 font-space-grotesk " >
-            <form onSubmit={calcPrice} className="w-full max-w-2xl bg-white rounded-xl h-full py-7 px-5 flex flex-col items-center gap-4 text-black" >
+            <div className="w-full max-w-2xl bg-white rounded-xl h-fit py-7 px-5 flex flex-col items-center gap-4 text-black" >
                 <h4 className="font-bold text-xl md:text-3xl ">Aptos Converter</h4>
 
-
+                <div className="flex gap-2 mb-4">
+                    {(["aptos", "bitcoin", "ethereum"] as const).map((token) => (
+                        <button
+                            key={token}
+                            type="button"
+                            onClick={() => {
+                                setSelectedToken(token)
+                                setFromValue("")
+                                setToValue("")
+                            }}
+                            className={`px-4 py-2 rounded-md capitalize font-medium ${selectedToken === token ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                        >
+                            {token}
+                        </button>
+                    ))}
+                </div>
 
 
 
@@ -95,7 +142,11 @@ export default function Page() {
                     {/* from-input */}
                     <label htmlFor="" className="flex flex-col items-center gap-1 p-2  " >
                         <span>{fromCurrency}</span>
-                        <input type="text" className="border border-black outline-none w-full  p-3 text-lg font-semibold rounded-md " />
+                        <input
+                            type="text"
+                            value={fromValue}
+                            onChange={(e) => handleFromValueChange(e.target.value)}
+                            className="border border-black outline-none w-full  p-3 text-lg font-semibold rounded-md " />
                     </label>
 
                     <button type="button" className="mt-4" onClick={switchCurrencies} >    <ArrowRightLeft size={40} /></button>
@@ -104,14 +155,26 @@ export default function Page() {
                     {/* to input  */}
                     <label htmlFor="" className="flex flex-col items-center gap-1 p-2  ">
                         <span>{toCurrency}</span>
-                        <input type="text" className="border border-black outline-none w-full  p-3 text-lg font-semibold rounded-md " />
+                        <input
+                            type="text"
+                            value={toValue}
+                            onChange={(e) => handleToValueChange(e.target.value)}
+                            className="border border-black outline-none w-full  p-3 text-lg font-semibold rounded-md " />
                     </label>
 
                 </div>
 
-                <button >Submit</button>
 
-            </form>
+
+
+                {rates && (
+                    <div className="text-sm text-gray-600 mt-2">
+                        1 {selectedToken.toUpperCase()} = ${rates[selectedToken]?.usd?.toFixed(2)} USD
+                    </div>
+                )}
+
+
+            </div>
         </div>
     )
 }
