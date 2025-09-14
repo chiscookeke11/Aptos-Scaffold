@@ -2,7 +2,7 @@ export const FeaturesData = [
   {
     title: "Aptos Contract Deployer",
     description: "Easily deploy and manage smart contracts on the Aptos blockchain with just a few clicks.",
-    url: "#"
+    url: "/contract-deployer"
   },
   {
     title: "Aptos Docs",

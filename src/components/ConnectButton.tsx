@@ -10,7 +10,7 @@ interface ConnectButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     children: React.ReactNode,
     variant?: "outline" | "default"
     ariaLabel?: string,
-    setShowModal: React.Dispatch<SetStateAction<boolean>>
+    setShowModal?: React.Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -29,7 +29,7 @@ export default function ConnectButton({ children, className, ariaLabel, setShowM
     const variantStyles = variant === "outline" ? " rounded-[1000px] border-[1px] border-white bg-transparent hover:bg-white hover:text-[#000] text-white transition-all duration-300 ease-in-out " : " border-[1px] border-[#171717] text-[#171717]  rounded-sm hover:bg-[#171717] hover:text-white transition-all duration-300 ease-in-out  "
 
     useEffect(() => {
-        if (connected) {
+        if (connected && setShowModal) {
             setShowModal(false)
         }
     }, [connected])

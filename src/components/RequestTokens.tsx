@@ -18,7 +18,7 @@ export default function RequestTokens() {
         e.preventDefault()
 
 
-        if (!recipientAddress) {
+        if (!recipientAddress || recipientAddress.trim.length < 1) {
             toast.error("Please fill in all fields")
             return;
         }
